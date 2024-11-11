@@ -1,0 +1,105 @@
+/* Style pour la barre de navigation */
+.nav-bar {
+    -fx-background-color: #2c79c1;
+    -fx-padding: 10.0px;
+    -fx-font-size: 14px;
+}
+
+.nav-bar .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    
+}
+
+.nav-bar .button:hover {
+    -fx-background-color: #1b4f82;
+}
+
+
+
+.options-menu-button, .user-menu-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;    
+    -fx-text-fill: white;
+    -fx-padding: 0 5px;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 0.0;
+    -fx-cursor: hand;
+}
+
+/* Enlever la flèche du MenuButton */
+.options-menu-button > .arrow-button,
+.user-menu-button >.arrow-button {
+    -fx-padding: 0px;
+}
+
+.options-menu-button > .arrow-button > .arrow,
+.user-menu-button >.arrow-button >.arrow {
+    -fx-padding: 0px;
+}
+
+.menu-item {
+    -fx-font-size: 14.0px;
+}
+
+
+/* Styliser le ComboBox principal */
+.language-dropdown {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+    -fx-cursor: hand;  
+}
+
+.language-dropdown .arrow-button .arrow {
+    -fx-background-color: white; 
+}
+
+
+.language-dropdown .text,
+.options-menu-button .text,
+.user-menu-button .text {
+    -fx-fill: white;
+}
+.language-dropdown:showing,
+.options-menu-button:showing,
+.user-menu-button:showing {
+    -fx-base: black;
+}
+
+/* Fin navbar */
+
+
+.search-container {
+    -fx-background-color: #f3f4f7;
+    -fx-padding: 20.0px;
+    -fx-border-radius: 10.0px;
+    -fx-background-radius: 10.0px;
+}
+
+.text-field {
+    -fx-padding: 10.0px;
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1.0px;
+    -fx-border-radius: 5.0px;
+    -fx-background-radius: 5.0px;
+}
+
+
+.search-button {
+    -fx-background-color: #2c79c1;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+    -fx-padding: 8.0px 16.0px;
+    -fx-border-radius: 5.0px;
+    -fx-background-radius: 5.0px;
+}
+
+.search-button:hover {
+    -fx-background-color: #1b4f82;
+}
