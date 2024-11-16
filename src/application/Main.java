@@ -11,117 +11,203 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    @Override
-    public void start(Stage primaryStage) {
-	// Barre de navigation
-	BorderPane navBar = new BorderPane();
-	navBar.getStyleClass().add("nav-bar");
+	@Override
+	public void start(Stage primaryStage) {
 
-	// Logo Reverso
-	ImageView reversoLogo = new ImageView(new Image(getClass().getResource("/images/logo.png").toExternalForm()));
-	reversoLogo.setFitHeight(30);
-	reversoLogo.setPreserveRatio(true);
+		// Barre de navigation
+		BorderPane navBar = new BorderPane();
+		navBar.getStyleClass().add("nav-bar");
 
-	// Boutons de navigation
-	Button btnTranslation = new Button("Traduction");
-	Button btnDefinition = new Button("Définition");
-	Button btnContext = new Button("Context");
-	Button btnCorrection = new Button("Correction");
-	Button btnSynonymes = new Button("Synonymes");
-	Button btnConjugaison = new Button("Conjugaison");
+		// Logo Reverso
+		ImageView reversoLogo = new ImageView(new Image(getClass().getResource("/images/logo.png").toExternalForm()));
+		reversoLogo.setFitHeight(30);
+		reversoLogo.setPreserveRatio(true);
 
-	// Création de l'image pour le logo utilisateur
-	ImageView userLogo = new ImageView(new Image(getClass().getResource("/images/userLogo.png").toExternalForm()));
-	userLogo.setFitHeight(35);
-	userLogo.setPreserveRatio(true);
+		// Boutons de navigation
+		Button btnTranslation = new Button("Traduction");
+		Button btnDefinition = new Button("Définition");
+		btnDefinition.setStyle("-fx-text-decoration: underline;");
+		Button btnContext = new Button("Context");
+		Button btnCorrection = new Button("Correction");
+		Button btnSynonymes = new Button("Synonymes");
+		Button btnConjugaison = new Button("Conjugaison");
 
-	// Création du MenuButton avec l'image en tant que graphique
-	MenuButton userMenuButton = new MenuButton("", userLogo);
+		// image pour le logo utilisateur
+		ImageView userLogo = new ImageView(new Image(getClass().getResource("/images/userLogo.png").toExternalForm()));
+		userLogo.setFitHeight(35);
+		userLogo.setPreserveRatio(true);
 
-	// Ajout des éléments de menu "Inscription" et "Connexion"
-	MenuItem inscriptionItem = new MenuItem("Inscription");
-	MenuItem connexionItem = new MenuItem("Connexion");
-	userMenuButton.getItems().addAll(inscriptionItem, connexionItem);
+		// MenuButton avec l'image
+		MenuButton userMenuButton = new MenuButton("", userLogo);
 
-	// Appliquer des styles spécifiques si nécessaire
-	userMenuButton.getStyleClass().add("user-menu-button");
+		// Ajout des éléments de menu "Inscription" et "Connexion"
+		MenuItem inscriptionItem = new MenuItem("Inscription");
+		MenuItem connexionItem = new MenuItem("Connexion");
+		userMenuButton.getItems().addAll(inscriptionItem, connexionItem);
 
-	// Menu déroulant pour les langues
-	ComboBox<String> languageDropdown = new ComboBox<>();
-	languageDropdown.getItems().addAll("FR", "EN", "ES");
-	languageDropdown.setValue("FR");
-	languageDropdown.getStyleClass().add("language-dropdown");
+		// Appliquer des styles spécifiques si nécessaire
+		userMenuButton.getStyleClass().add("user-menu-button");
 
-	// Menu avec trois points
-	ImageView optButton = new ImageView(new Image(getClass().getResource("/images/optButton.png").toExternalForm()));
-	optButton.setFitHeight(30);
-	optButton.setPreserveRatio(true);
-	MenuButton optionsButton = new MenuButton("", optButton);
-	optionsButton.getItems().addAll(new MenuItem("À propos de Reverso"), new MenuItem("Reverso pour les entreprises"), new MenuItem("Newsletter"), new MenuItem("Contactez-nous"));
-	optionsButton.getStyleClass().add("options-menu-button");
+		// Menu déroulant pour les langues
+		ComboBox<String> languageDropdown = new ComboBox<>();
+		languageDropdown.getItems().addAll("FR", "EN", "ES");
+		languageDropdown.setValue("FR");
+		languageDropdown.getStyleClass().add("language-dropdown");
 
-	// Crée un espace flexible
-	Region spacer = new Region();
-	HBox.setHgrow(spacer, Priority.ALWAYS); // Permet à l'espace de prendre tout l'espace disponible
+		// Menu avec trois points
+		ImageView optButton = new ImageView(
+				new Image(getClass().getResource("/images/optButton.png").toExternalForm()));
+		optButton.setFitHeight(30);
+		optButton.setPreserveRatio(true);
+		MenuButton optionsButton = new MenuButton("", optButton);
+		optionsButton.getItems().addAll(
+				new MenuItem("À propos de Reverso"),
+				new MenuItem("Reverso pour les entreprises"),
+				new MenuItem("Newsletter"),
+				new MenuItem("Contactez-nous"));
+		optionsButton.getStyleClass().add("options-menu-button");
 
-	// Ajout des éléments dans la barre de navigation
-	navBar.getChildren().addAll(reversoLogo, btnTranslation, btnDefinition, btnContext, btnCorrection, btnSynonymes,
-		btnConjugaison, spacer, userMenuButton, languageDropdown, optionsButton);
+		// Crée un espace flexible
+		Region spacer = new Region();
+		HBox.setHgrow(spacer, Priority.ALWAYS); // Permet à l'espace de prendre tout l'espace disponible
 
-	HBox leftNav = new HBox(10);
-	leftNav.setAlignment(Pos.CENTER); // Centrer verticalement
-	leftNav.getChildren().addAll(reversoLogo, btnTranslation, btnDefinition, btnContext, btnCorrection,
-		btnSynonymes, btnConjugaison);
-	leftNav.setPadding(new Insets(0, 0, 0, 20)); // 20 à gauche
+		// Ajout des éléments dans la barre de navigation
+		navBar.getChildren().addAll(reversoLogo, btnTranslation, btnDefinition, btnContext, btnCorrection, btnSynonymes,
+				btnConjugaison, spacer, userMenuButton, languageDropdown, optionsButton);
 
-	HBox rightNav = new HBox(10);
-	rightNav.setAlignment(Pos.CENTER); // Centrer verticalement
-	rightNav.getChildren().addAll(userMenuButton, languageDropdown, optionsButton);
-	rightNav.setPadding(new Insets(0, 20, 0, 0)); // 20 à droite
+		HBox leftNav = new HBox(10);
+		leftNav.setAlignment(Pos.CENTER); // Centrer verticalement
+		leftNav.getChildren().addAll(reversoLogo, btnTranslation, btnDefinition, btnContext, btnCorrection,
+				btnSynonymes, btnConjugaison);
+		leftNav.setPadding(new Insets(0, 0, 0, 20)); // 20 à gauche
 
-	// Ajout des éléments dans un BorderPane
-	navBar.setLeft(leftNav);
-	navBar.setRight(rightNav);
+		HBox rightNav = new HBox(10);
+		rightNav.setAlignment(Pos.CENTER); // Centrer verticalement
+		rightNav.getChildren().addAll(userMenuButton, languageDropdown, optionsButton);
+		rightNav.setPadding(new Insets(0, 20, 0, 0)); // 20 à droite
 
-	// Zone de recherche
-	VBox searchBox = new VBox(10);
-	searchBox.setPadding(new Insets(20));
-	searchBox.getStyleClass().add("search-container");
+		// Ajout des éléments dans un BorderPane
+		navBar.setLeft(leftNav);
+		navBar.setRight(rightNav);
 
-	Label titleLabel = new Label(
-		"Dictionnaire Français en ligne : traduction des mots et expressions, définition, synonymes");
+		//
+		// Fin de la navbar //
+		//
 
-	TextField searchField = new TextField();
-	searchField.setPromptText("Saisir un mot ou une expression");
-	searchField.getStyleClass().add("text-field");
+		// Label de présentation à afficher sous la barre de navigation
+		Label presentationLabel = new Label(
+				"Dictionnaire Français Synonymes en ligne : traduction des mots et expressions, définition, synonymes");
+		presentationLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
-	Button searchButton = new Button("Chercher la définition");
-	searchButton.getStyleClass().add("search-button");
+		// Créer un VBox pour empiler la barre de navigation et le label de présentation
+		VBox topSection = new VBox(10); // Espace entre la navBar et le label
+		topSection.getChildren().addAll(navBar, presentationLabel);
+		topSection.setAlignment(Pos.CENTER);
 
-	HBox searchFieldBox = new HBox(10);
-	searchFieldBox.getChildren().addAll(searchField, searchButton);
+		// Conteneur principal de la page
+		VBox page = new VBox(15);
+		page.setAlignment(Pos.CENTER);
+		page.setPadding(new Insets(10));
+		page.getStyleClass().add("container-page");
 
-	searchBox.getChildren().addAll(titleLabel, searchFieldBox);
+		// Titre
+		Label titleLabel = new Label("Saisir un mot ou une expression :");
+		titleLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-alignment: center;");
 
-	// Layout principal
-	BorderPane root = new BorderPane();
-	root.setTop(navBar);
-	root.setCenter(searchBox);
+		// Barre de recherche
+		TextField searchField = new TextField();
+		searchField.getStyleClass().add("text-field");
 
-	Scene scene = new Scene(root, 1280, 720);
-	scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		// Icone clavier
+		ImageView keyboardIcon = new ImageView(new Image(getClass().getResourceAsStream("/images/clavier.png")));
+		keyboardIcon.setFitHeight(20);
+		keyboardIcon.setPreserveRatio(true);
 
-	primaryStage.setTitle("Mockup Reverso");
-	primaryStage.setScene(scene);
-	primaryStage.show();
-    }
+		// Placer l'icone à l'intérieur de la barre, sur la droite
+		StackPane searchFieldWithIcon = new StackPane();
+		searchFieldWithIcon.getChildren().addAll(searchField, keyboardIcon);
+		searchFieldWithIcon.setMaxWidth(470); // max width de searchField
+		StackPane.setAlignment(keyboardIcon, Pos.CENTER_RIGHT);
+		StackPane.setMargin(keyboardIcon, new Insets(0, 10, 0, 0));
 
-    public static void main(String[] args) {
-	launch(args);
-    }
+		// Menu déroulant des langues
+		ComboBox<String> langDropdown = new ComboBox<>();
+		langDropdown.getItems().addAll("Allemand", "Anglais", "Arabe", "Chinois", "Coréen", "Espagnol", "Français",
+				"Hébreu", "Italien", "Japonais", "Néerlandais", "Polonais", "Portugais", "Roumain", "Russe", "Suédois",
+				"Turc", "Ukrainien");
+		langDropdown.setValue("Français");
+		langDropdown.getStyleClass().add("lang-dropdown");
+
+		// Icône du drapeau France
+		ImageView dropdownIcon = new ImageView(new Image(getClass().getResourceAsStream("/images/drapeauFR.png")));
+		dropdownIcon.setFitHeight(16);
+		dropdownIcon.setPreserveRatio(true);
+
+		// Conteneur horizontal pour l'icône et le menu déroulant
+		HBox langDropdownWithIcon = new HBox(5);
+		langDropdownWithIcon.setAlignment(Pos.CENTER_LEFT);
+		langDropdownWithIcon.getChildren().addAll(dropdownIcon, langDropdown);
+		langDropdownWithIcon.getStyleClass().add("lang-dropdown-button");
+
+		// Bouton Chercher la définition
+		Button searchButton = new Button("Chercher la définition");
+		searchButton.getStyleClass().add("search-button");
+
+		// Icone de recherche
+		ImageView searchIcon = new ImageView(new Image(getClass().getResourceAsStream("/images/search.png")));
+		searchIcon.setFitHeight(16);
+		searchIcon.setPreserveRatio(true);
+		searchButton.setGraphic(searchIcon);
+		searchButton.setContentDisplay(ContentDisplay.RIGHT); // Placer l'icône à droite du texte
+
+		// Conteneur pour menu Langues et bouton Recherche
+		HBox langAndButtonBox = new HBox(10);
+		langAndButtonBox.setAlignment(Pos.CENTER);
+		langAndButtonBox.getChildren().addAll(langDropdownWithIcon, searchButton);
+		langAndButtonBox.setSpacing(130);
+
+		Label defLabel = new Label(
+				"Le français ne cesse jamais d'étonner par la variété de ses expressions, jeux de mots, ambigüités.\n" + //
+						"Notre dictionnaire de définitions vous donne les clés pour éviter les pièges de la langue française et être à l'aise à l'écrit comme à l'oral.");
+		defLabel.setWrapText(true);
+		defLabel.setStyle("-fx-font-size: 14px; -fx-text-alignment: center;");
+
+		// Ajouter tous les éléments au conteneur principal
+		page.getChildren().addAll(titleLabel, searchFieldWithIcon, langAndButtonBox, defLabel);
+
+		ImageView footer = new ImageView(new Image(getClass().getResourceAsStream("/images/footer.png")));
+		footer.setFitWidth(1280);
+		footer.setPreserveRatio(true);
+		StackPane footerPane = new StackPane();
+		footerPane.getChildren().add(footer);
+		StackPane.setAlignment(footer, Pos.CENTER);
+
+		//
+		// Fin de la page //
+		//
+
+		// Créer le BorderPane final
+		BorderPane root = new BorderPane();
+		root.setTop(topSection); // Ajouter topSection qui contient la navBar et le label
+		root.setCenter(page);
+		root.setBottom(footerPane);
+		root.setStyle("-fx-background-color: #f6fafd;");
+
+		Scene scene = new Scene(root, 1280, 720);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+
+		primaryStage.setTitle("Reverso Dictionnaire");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
 }
