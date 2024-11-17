@@ -1,7 +1,8 @@
 package application;
 
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,11 +37,15 @@ public class Expression extends Application {
 		Button btnSynonymes = new Button("Synonymes");
 		Button btnConjugaison = new Button("Conjugaison");
 
-		btnDefinition.setOnAction(event -> {
-			// Fermer la fenêtre actuelle et ouvrir la page Definition
-			((Stage) btnDefinition.getScene().getWindow()).close();
-			Definition mainApp = new Definition();
-			mainApp.start(new Stage());
+		btnDefinition.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// Fermer la fenêtre actuelle et ouvrir la page Définition
+				Stage currentStage = (Stage) btnDefinition.getScene().getWindow();
+				currentStage.close();
+				Definition mainApp = new Definition();
+				mainApp.start(new Stage());
+			}
 		});
 
 		// image pour le logo utilisateur
