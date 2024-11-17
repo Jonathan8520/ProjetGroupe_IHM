@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -34,6 +35,13 @@ public class Expression extends Application {
 		Button btnCorrection = new Button("Correction");
 		Button btnSynonymes = new Button("Synonymes");
 		Button btnConjugaison = new Button("Conjugaison");
+
+		btnDefinition.setOnAction(event -> {
+			// Fermer la fenêtre actuelle et ouvrir la page Definition
+			((Stage) btnDefinition.getScene().getWindow()).close();
+			Definition mainApp = new Definition();
+			mainApp.start(new Stage());
+		});
 
 		// image pour le logo utilisateur
 		ImageView userLogo = new ImageView(new Image(getClass().getResource("/images/userLogo.png").toExternalForm()));
@@ -173,7 +181,7 @@ public class Expression extends Application {
 
 		// On met tout dans un BorderPane
 		BorderPane expressionsList = new BorderPane();
-		expressionsList.setTop(expressionsLabel); 
+		expressionsList.setTop(expressionsLabel);
 		expressionsList.setCenter(expressionsBox);
 		expressionsList.setBottom(allExpressionsButton);
 		expressionsList.setPadding(new Insets(10, 20, 10, 20));

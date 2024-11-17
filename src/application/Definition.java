@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Definition extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -35,6 +35,13 @@ public class Main extends Application {
 		Button btnCorrection = new Button("Correction");
 		Button btnSynonymes = new Button("Synonymes");
 		Button btnConjugaison = new Button("Conjugaison");
+
+		btnExpression.setOnAction(event -> {
+			// Fermer la fenêtre actuelle et ouvrir la page Expression
+			((Stage) btnExpression.getScene().getWindow()).close();
+			Expression mainApp = new Expression();
+			mainApp.start(new Stage());
+		});
 
 		// image pour le logo utilisateur
 		ImageView userLogo = new ImageView(new Image(getClass().getResource("/images/userLogo.png").toExternalForm()));
