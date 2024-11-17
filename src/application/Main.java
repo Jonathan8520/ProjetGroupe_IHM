@@ -92,7 +92,7 @@ public class Main extends Application {
 
 		// Label de présentation à afficher sous la barre de navigation
 		Label presentationLabel = new Label(
-				"Dictionnaire Français Synonymes en ligne : traduction des mots et expressions, définition, synonymes");
+				"Votre référence en ligne pour des définitions claires et précises");
 		presentationLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
 		// Créer un VBox pour empiler la barre de navigation et le label de présentation
