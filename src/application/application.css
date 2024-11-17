@@ -16,10 +16,13 @@
     -fx-background-color: #1b4f82;
 }
 
+#btnInscription {
+    -fx-font-size: 14px;
+    -fx-background-color: #52ADD1;
+    -fx-text-fill: white;
+}
 
-
-.options-menu-button,
-.user-menu-button {
+.options-menu-button {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: white;
@@ -30,13 +33,11 @@
 }
 
 /* Enlever la flèche du MenuButton */
-.options-menu-button>.arrow-button,
-.user-menu-button>.arrow-button {
+.options-menu-button>.arrow-button {
     -fx-padding: 0px;
 }
 
-.options-menu-button>.arrow-button>.arrow,
-.user-menu-button>.arrow-button>.arrow {
+.options-menu-button>.arrow-button>.arrow {
     -fx-padding: 0px;
 }
 
@@ -62,14 +63,12 @@
 
 
 .language-dropdown .text,
-.options-menu-button .text,
-.user-menu-button .text {
+.options-menu-button .text {
     -fx-fill: white;
 }
 
 .language-dropdown:showing,
-.options-menu-button:showing,
-.user-menu-button:showing {
+.options-menu-button:showing {
     -fx-base: black;
 }
 
@@ -106,7 +105,6 @@
     -fx-background-radius: 5px;
     -fx-cursor: hand;
 }
-
 
 
 .lang-dropdown {

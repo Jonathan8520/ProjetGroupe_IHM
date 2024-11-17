@@ -9,8 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -32,8 +30,8 @@ public class Main extends Application {
 		// Boutons de navigation
 		Button btnTranslation = new Button("Traduction");
 		Button btnDefinition = new Button("Définition");
-		btnDefinition.setStyle("-fx-text-decoration: underline;");
-		Button btnContext = new Button("Context");
+		btnDefinition.setStyle("-fx-underline: true; -fx-background-color: #1b4f82;");
+		Button btnExpression = new Button("Expression");
 		Button btnCorrection = new Button("Correction");
 		Button btnSynonymes = new Button("Synonymes");
 		Button btnConjugaison = new Button("Conjugaison");
@@ -43,17 +41,15 @@ public class Main extends Application {
 		userLogo.setFitHeight(35);
 		userLogo.setPreserveRatio(true);
 
-		// MenuButton avec l'image
-		MenuButton userMenuButton = new MenuButton("", userLogo);
+		// Bouton pour la connexion (logo utilisateur)
+		Button userLoginButton = new Button();
+		userLoginButton.setGraphic(userLogo);
+		userLoginButton.setStyle("-fx-background-color: transparent;"); 
 
-		// Ajout des éléments de menu "Inscription" et "Connexion"
-		MenuItem inscriptionItem = new MenuItem("Inscription");
-		MenuItem connexionItem = new MenuItem("Connexion");
-		userMenuButton.getItems().addAll(inscriptionItem, connexionItem);
-
-		// Appliquer des styles spécifiques si nécessaire
-		userMenuButton.getStyleClass().add("user-menu-button");
-
+		// Bouton "Inscription"
+		Button inscriptionButton = new Button("Inscription");
+		inscriptionButton.setId("btnInscription");
+		
 		// Menu déroulant pour les langues
 		ComboBox<String> languageDropdown = new ComboBox<>();
 		languageDropdown.getItems().addAll("FR", "EN", "ES");
@@ -73,26 +69,20 @@ public class Main extends Application {
 				new MenuItem("Contactez-nous"));
 		optionsButton.getStyleClass().add("options-menu-button");
 
-		// Crée un espace flexible
-		Region spacer = new Region();
-		HBox.setHgrow(spacer, Priority.ALWAYS); // Permet à l'espace de prendre tout l'espace disponible
-
-		// Ajout des éléments dans la barre de navigation
-		navBar.getChildren().addAll(reversoLogo, btnTranslation, btnDefinition, btnContext, btnCorrection, btnSynonymes,
-				btnConjugaison, spacer, userMenuButton, languageDropdown, optionsButton);
 
 		HBox leftNav = new HBox(10);
-		leftNav.setAlignment(Pos.CENTER); // Centrer verticalement
-		leftNav.getChildren().addAll(reversoLogo, btnTranslation, btnDefinition, btnContext, btnCorrection,
-				btnSynonymes, btnConjugaison);
+		leftNav.setAlignment(Pos.CENTER);
+		leftNav.getChildren().addAll(
+			reversoLogo, btnTranslation, btnDefinition, btnExpression, btnCorrection,btnSynonymes, btnConjugaison);
 		leftNav.setPadding(new Insets(0, 0, 0, 20)); // 20 à gauche
 
 		HBox rightNav = new HBox(10);
-		rightNav.setAlignment(Pos.CENTER); // Centrer verticalement
-		rightNav.getChildren().addAll(userMenuButton, languageDropdown, optionsButton);
+		rightNav.setAlignment(Pos.CENTER);
+		rightNav.getChildren().addAll(
+			inscriptionButton, userLoginButton, languageDropdown, optionsButton);
 		rightNav.setPadding(new Insets(0, 20, 0, 0)); // 20 à droite
 
-		// Ajout des éléments dans un BorderPane
+		// Ajout des éléments dans le BorderPane navBar
 		navBar.setLeft(leftNav);
 		navBar.setRight(rightNav);
 
@@ -194,7 +184,7 @@ public class Main extends Application {
 
 		// Créer le BorderPane final
 		BorderPane root = new BorderPane();
-		root.setTop(topSection); // Ajouter topSection qui contient la navBar et le label
+		root.setTop(topSection);
 		root.setCenter(page);
 		root.setBottom(footerPane);
 		root.setStyle("-fx-background-color: #f6fafd;");
