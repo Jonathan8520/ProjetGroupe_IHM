@@ -19,17 +19,14 @@ public class Expression extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		// Barre de navigation
 		BorderPane navBar = new BorderPane();
-		navBar.getStyleClass().add("nav-bar");
+		navBar.getStyleClass().add("navbar");
 
-		// Logo Reverso
-		ImageView reversoLogo = new ImageView(new Image(getClass().getResource("/images/logo.png").toExternalForm()));
+		ImageView reversoLogo = new ImageView(new Image(getClass().getResourceAsStream("/images/logo.png")));
 		reversoLogo.setFitHeight(30);
 		reversoLogo.setPreserveRatio(true);
 
-		// Boutons de navigation
-		Button btnTranslation = new Button("Traduction");
+		Button btnTraduction = new Button("Traduction");
 		Button btnDefinition = new Button("Définition");
 		Button btnExpression = new Button("Expression");
 		btnExpression.setStyle("-fx-underline: true; -fx-background-color: #1b4f82;");
@@ -40,96 +37,99 @@ public class Expression extends Application {
 		btnDefinition.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// Fermer la fenêtre actuelle et ouvrir la page Définition
-				Stage currentStage = (Stage) btnDefinition.getScene().getWindow();
-				currentStage.close();
-				Definition mainApp = new Definition();
-				mainApp.start(new Stage());
+				// Fermer Expression et ouvrir Def
+				Stage pageActuelle = (Stage) btnDefinition.getScene().getWindow();
+				pageActuelle.close();
+				Definition pageDuBtn = new Definition();
+				pageDuBtn.start(new Stage());
 			}
 		});
 
-		// image pour le logo utilisateur
-		ImageView userLogo = new ImageView(new Image(getClass().getResource("/images/userLogo.png").toExternalForm()));
-		userLogo.setFitHeight(35);
-		userLogo.setPreserveRatio(true);
+		Button btnInscription = new Button("Inscription");
+		btnInscription.setId("btnInscription");
 
-		// Bouton pour la connexion (logo utilisateur)
-		Button userLoginButton = new Button();
-		userLoginButton.setGraphic(userLogo);
-		userLoginButton.setStyle("-fx-background-color: transparent;");
+		btnInscription.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// Fermer Expression et ouvrir Inscription
+				Stage pageActuelle = (Stage) btnInscription.getScene().getWindow();
+				pageActuelle.close();
+				Inscription pageDuBtn = new Inscription();
+				pageDuBtn.start(new Stage());
+			}
+		});
 
-		// Bouton "Inscription"
-		Button inscriptionButton = new Button("Inscription");
-		inscriptionButton.setId("btnInscription");
+		ImageView logoUser = new ImageView(new Image(getClass().getResourceAsStream("/images/userLogo.png")));
+		logoUser.setFitHeight(35);
+		logoUser.setPreserveRatio(true);
 
-		// Menu déroulant pour les langues
-		ComboBox<String> languageDropdown = new ComboBox<>();
-		languageDropdown.getItems().addAll("FR", "EN", "ES");
-		languageDropdown.setValue("FR");
-		languageDropdown.getStyleClass().add("language-dropdown");
+		Button logoConnexion = new Button();
+		logoConnexion.setGraphic(logoUser);
+		logoConnexion.setStyle("-fx-background-color: transparent;");
 
-		// Menu avec trois points
-		ImageView optButton = new ImageView(
-				new Image(getClass().getResource("/images/optButton.png").toExternalForm()));
-		optButton.setFitHeight(30);
-		optButton.setPreserveRatio(true);
-		MenuButton optionsButton = new MenuButton("", optButton);
-		optionsButton.getItems().addAll(
+		ComboBox<String> listeLanguesSite = new ComboBox<>();
+		listeLanguesSite.getItems().addAll("FR", "EN", "ES", "IT", "RU");
+		listeLanguesSite.setValue("FR");
+		listeLanguesSite.getStyleClass().add("listeLanguesSite");
+
+		ImageView imgTroisPoints = new ImageView(new Image(getClass().getResourceAsStream("/images/optButton.png")));
+		imgTroisPoints.setFitHeight(30);
+		imgTroisPoints.setPreserveRatio(true);
+
+		MenuButton btnTroisPoints = new MenuButton();
+		btnTroisPoints.setGraphic(imgTroisPoints);
+		btnTroisPoints.getItems().addAll(
 				new MenuItem("À propos de Reverso"),
 				new MenuItem("Reverso pour les entreprises"),
 				new MenuItem("Newsletter"),
 				new MenuItem("Contactez-nous"));
-		optionsButton.getStyleClass().add("options-menu-button");
+		btnTroisPoints.getStyleClass().add("btnTroisPoints");
 
 		HBox leftNav = new HBox(10);
 		leftNav.setAlignment(Pos.CENTER);
+		leftNav.setPadding(new Insets(0, 0, 0, 20));
 		leftNav.getChildren().addAll(
-				reversoLogo, btnTranslation, btnDefinition, btnExpression, btnCorrection, btnSynonymes, btnConjugaison);
-		leftNav.setPadding(new Insets(0, 0, 0, 20)); // 20 à gauche
+				reversoLogo, btnTraduction, btnDefinition, btnExpression, btnCorrection, btnSynonymes, btnConjugaison);
 
 		HBox rightNav = new HBox(10);
 		rightNav.setAlignment(Pos.CENTER);
+		rightNav.setPadding(new Insets(0, 20, 0, 0));
 		rightNav.getChildren().addAll(
-				inscriptionButton, userLoginButton, languageDropdown, optionsButton);
-		rightNav.setPadding(new Insets(0, 20, 0, 0)); // 20 à droite
+				btnInscription, logoConnexion, listeLanguesSite, btnTroisPoints);
 
-		// Ajout des éléments dans le BorderPane navBar
 		navBar.setLeft(leftNav);
 		navBar.setRight(rightNav);
 
+		// 
+		//// Fin navbar ////
 		//
-		// Fin de la navbar //
+
+		// 
+		//// Début page ////
 		//
 
-		// Image du logo
-		ImageView expressioLogo = new ImageView(
-				new Image(getClass().getResource("/images/expressio.png").toExternalForm()));
-		expressioLogo.setFitHeight(60);
-		expressioLogo.setPreserveRatio(true);
+		ImageView logoExpressio = new ImageView(new Image(getClass().getResourceAsStream("/images/expressio.png")));
+		logoExpressio.setFitHeight(60);
+		logoExpressio.setPreserveRatio(true);
 
-		// Sous-titre
-		Label subtitleLabel = new Label("Les expressions françaises décortiquées");
-		subtitleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold");
+		Label presentation = new Label("Les expressions françaises décortiquées");
+		presentation.setStyle("-fx-font-size: 16px; -fx-font-weight: bold");
 
-		// Barre de recherche
-		TextField searchField = new TextField();
-		searchField.setPromptText("Tapez un ou plusieurs mots pour trouver les expressions correspondantes");
-		searchField.getStyleClass().add("text-field");
+		TextField barreRecherche = new TextField();
+		barreRecherche.setPromptText("Tapez un ou plusieurs mots pour trouver les expressions correspondantes");
 
-		// Bouton pour la recherche
-		Button searchButton = new Button("Chercher");
-		searchButton.getStyleClass().add("search-button");
+		Button btnRecherche = new Button("Chercher");
+		btnRecherche.getStyleClass().add("btnRecherche");
 
-		// On met la barre de recherche + le bouton Recherche ensemble
-		HBox searchBox = new HBox(10, searchField, searchButton);
-		searchBox.setAlignment(Pos.CENTER);
-		searchBox.setPadding(new Insets(20));
+		HBox barreEtBouton = new HBox(10, barreRecherche, btnRecherche);
+		barreEtBouton.setAlignment(Pos.CENTER);
+		barreEtBouton.setPadding(new Insets(20));
 
-		// On met tout dans un VBox
-		VBox mainVBox = new VBox(15);
-		mainVBox.setAlignment(Pos.CENTER);
-		mainVBox.setPadding(new Insets(20, 0, 0, 0)); // 20 en haut
-		mainVBox.getChildren().addAll(expressioLogo, subtitleLabel, searchBox);
+		VBox hautPage = new VBox(15);
+		hautPage.setAlignment(Pos.CENTER);
+		hautPage.setPadding(new Insets(20, 0, 0, 0));
+		hautPage.getChildren().addAll(logoExpressio, presentation, barreEtBouton);
+		BorderPane.setAlignment(hautPage, Pos.CENTER);
 
 		//////
 
@@ -140,14 +140,12 @@ public class Expression extends Application {
 		exprPhrase.setStyle("-fx-font-size: 17px; -fx-font-weight: bold");
 
 		Button btnHasard = new Button("Une au hasard");
-		btnHasard.getStyleClass().add("btn-hasard");
+		btnHasard.getStyleClass().add("btnHasard");
 
-		// On met exprTitre + exprPhrase dans un VBox
 		VBox titreEtPhrase = new VBox(10);
-		VBox.setMargin(exprPhrase, new Insets(0, 0, 0, 20)); // 20px de marge à gauche
+		VBox.setMargin(exprPhrase, new Insets(0, 0, 0, 20));
 		titreEtPhrase.getChildren().addAll(exprTitre, exprPhrase);
 
-		// On met tout dans un BorderPane
 		BorderPane expressionDuJour = new BorderPane();
 		expressionDuJour.setLeft(titreEtPhrase);
 		expressionDuJour.setRight(btnHasard);
@@ -156,72 +154,65 @@ public class Expression extends Application {
 
 		//////
 
-		Label expressionsLabel = new Label("Quelques expressions choisies :");
+		Label expressionsTitre = new Label("Quelques expressions choisies :");
+		BorderPane.setAlignment(expressionsTitre, Pos.CENTER_LEFT);
+		BorderPane.setMargin(expressionsTitre, new Insets(10, 0, 10, 0));
 
-		VBox column1 = new VBox(5); // Colonne de gauche
-		column1.getChildren().addAll(
+		VBox colonneGauche = new VBox(5);
+		colonneGauche.getChildren().addAll(
 				new Label("• C'est les voleurs qui crient au voleur"),
 				new Label("• Ne pas pousser mémé dans les orties"),
 				new Label("• Être maquillée comme une voiture volée"),
 				new Label("• Ne pas payer de mine"),
 				new Label("• Peigner la girafe"));
 
-		VBox column2 = new VBox(5); // Colonne de droite
-		column2.getChildren().addAll(
+		VBox colonneDroite = new VBox(5);
+		colonneDroite.getChildren().addAll(
 				new Label("• Voir midi à sa porte"),
 				new Label("• C'est pas la petite bête qui va manger la grosse"),
 				new Label("• C'est pas la mer à boire"),
 				new Label("• C'est pas au vieux singe qu'on apprend à faire des grimaces"),
 				new Label("• Ça casse pas trois pattes à un canard"));
 
-		// HBox pour les deux colonnes d'expressions
-		HBox expressionsBox = new HBox(50); // Espacement entre les deux colonnes
-		expressionsBox.setAlignment(Pos.CENTER_LEFT);
-		expressionsBox.getChildren().addAll(column1, column2);
-		expressionsBox.setStyle("-fx-font-size: 16px;");
+		HBox deuxColonnes = new HBox(50);
+		deuxColonnes.setAlignment(Pos.CENTER_LEFT);
+		deuxColonnes.getChildren().addAll(colonneGauche, colonneDroite);
+		deuxColonnes.setStyle("-fx-font-size: 16px;");
+		BorderPane.setMargin(deuxColonnes, new Insets(20));
 
-		// Bouton pour voir toutes les expressions
-		Button allExpressionsButton = new Button("Voir toutes les expressions");
-		allExpressionsButton.getStyleClass().add("allExpression-button");
+		Button btnVoirTout = new Button("Voir toutes les expressions");
+		btnVoirTout.getStyleClass().add("btnVoirTout");
+		BorderPane.setAlignment(btnVoirTout, Pos.BOTTOM_RIGHT);
+		BorderPane.setMargin(btnVoirTout, new Insets(10, 10, 10, 10));
 
-		// On met tout dans un BorderPane
-		BorderPane expressionsList = new BorderPane();
-		expressionsList.setTop(expressionsLabel);
-		expressionsList.setCenter(expressionsBox);
-		expressionsList.setBottom(allExpressionsButton);
-		expressionsList.setPadding(new Insets(10, 20, 10, 20));
-
-		expressionsList.getStyleClass().add("expressionListe-page");
+		BorderPane expressionsListe = new BorderPane();
+		expressionsListe.setTop(expressionsTitre);
+		expressionsListe.setCenter(deuxColonnes);
+		expressionsListe.setBottom(btnVoirTout);
+		expressionsListe.setPadding(new Insets(10, 20, 10, 20));
+		BorderPane.setAlignment(expressionsListe, Pos.CENTER);
+		BorderPane.setMargin(expressionsListe, new Insets(20, 0, 50, 0));
+		expressionsListe.getStyleClass().add("expressionListe-page");
 
 		///////
 
-		// Configurer l'alignement et les marges
-		BorderPane.setAlignment(expressionsLabel, Pos.CENTER_LEFT);
-		BorderPane.setAlignment(allExpressionsButton, Pos.BOTTOM_RIGHT);
-		BorderPane.setAlignment(mainVBox, Pos.CENTER);
-		BorderPane.setAlignment(expressionsList, Pos.CENTER);
-		BorderPane.setMargin(expressionsLabel, new Insets(10, 0, 10, 0));
-		BorderPane.setMargin(expressionsBox, new Insets(20));
-		BorderPane.setMargin(allExpressionsButton, new Insets(10, 10, 10, 10));
-		BorderPane.setMargin(expressionsList, new Insets(20, 0, 50, 0));
-
-		// Conteneur principal avec BorderPane
 		BorderPane page = new BorderPane();
-		page.setTop(mainVBox);
+		page.setTop(hautPage);
 		page.setCenter(expressionDuJour);
-		page.setBottom(expressionsList);
+		page.setBottom(expressionsListe);
 
 		//
 		// Fin de la page //
 		//
 
-		// Créer le BorderPane final
+		// BorderPane final
 		BorderPane root = new BorderPane();
 		root.setTop(navBar);
 		root.setCenter(page);
 		root.setStyle("-fx-background-color: #f6fafd;");
 
 		Scene scene = new Scene(root, 1280, 720);
+		scene.getStylesheets().add(getClass().getResource("navbar.css").toExternalForm());
 		scene.getStylesheets().add(getClass().getResource("expression.css").toExternalForm());
 
 		primaryStage.setTitle("Reverso Expression");

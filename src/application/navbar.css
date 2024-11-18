@@ -1,0 +1,64 @@
+.navbar {
+    -fx-background-color: #2c79c1;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}
+
+.navbar .button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+
+}
+
+.navbar .button:hover {
+    -fx-background-color: #1b4f82;
+}
+
+#btnInscription {
+    -fx-font-size: 14px;
+    -fx-background-color: #52ADD1;
+    -fx-text-fill: white;
+}
+
+.btnTroisPoints {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 0 5px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+}
+
+/* Enlever la flèche du MenuButton */
+.btnTroisPoints .arrow-button .arrow {
+    -fx-padding: 0px;
+}
+
+
+.listeLanguesSite {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+.listeLanguesSite .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+
+.listeLanguesSite .text,
+.btnTroisPoints .text {
+    -fx-fill: white;
+}
+
+.listeLanguesSite:showing,
+.btnTroisPoints:showing {
+    -fx-base: black;
+}
