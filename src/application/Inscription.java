@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
@@ -119,7 +120,7 @@ public class Inscription extends Application {
 		text.setPromptText("Entrez votre mail");
 		HBox hbox = new HBox(20);
 		hbox.getChildren().addAll(label, text);
-		hbox.setAlignment(Pos.CENTER);
+		hbox.setAlignment(Pos.CENTER_RIGHT);
 
 		Label label1 = new Label("Mot de passe :");
 		label1.setStyle("-fx-text-fill: #1b4f82; -fx-font-weight: bold;");
@@ -127,15 +128,18 @@ public class Inscription extends Application {
 		text1.setPromptText("Entrez votre mot de passe");
 		HBox hbox1 = new HBox(20);
 		hbox1.getChildren().addAll(label1, text1);
-		hbox1.setAlignment(Pos.CENTER);
+		hbox1.setAlignment(Pos.CENTER_RIGHT);
 
 		Label label2 = new Label("Confirmez votre mot de passe :");
-		label2.setStyle("-fx-text-fill: #1b4f82; -fx-font-weight: bold;");
+		label2.setWrapText(true); // double ligne
 		TextField text2 = new TextField();
 		text2.setPromptText("Entrez votre mot de passe");
 		HBox hbox2 = new HBox(20);
 		hbox2.getChildren().addAll(label2, text2);
-		hbox2.setAlignment(Pos.CENTER);
+		hbox2.setAlignment(Pos.CENTER_RIGHT);
+
+		VBox groupe = new VBox(15, hbox, hbox1, hbox2); 
+		VBox.setMargin(groupe, new Insets(0, 250, 0, 250)); // seul moyen trouvé pour centrer...
 
 		CheckBox checkbox1 = new CheckBox("Je souhaite être informé des nouveautés de Reverso.");
 		checkbox1.setStyle("-fx-font-weight: bold;");
@@ -197,7 +201,7 @@ public class Inscription extends Application {
 		page.setPadding(new Insets(30));
 		page.setAlignment(Pos.CENTER);
 		page.getStyleClass().add("page");
-		page.getChildren().addAll(hbox, hbox1, hbox2, checkbox1, boutonInscrire, hboxphrase, lignehaut,
+		page.getChildren().addAll(groupe, checkbox1, boutonInscrire, hboxphrase, lignehaut,
 				troisIcones, separatorBas, hboxphrase1);
 
 		//

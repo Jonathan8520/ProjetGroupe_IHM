@@ -7,6 +7,14 @@
     -fx-max-height: 250;
 }
 
+/* Styles pour le label */
+.label {
+    -fx-text-fill: #1b4f82; 
+    -fx-font-weight: bold; 
+    -fx-text-alignment: right; 
+    -fx-min-height: 34px;
+}
+
 .text-field {
     -fx-font-size: 14px;
     -fx-padding: 5px 10px;
